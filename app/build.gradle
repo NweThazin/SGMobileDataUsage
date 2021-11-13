@@ -69,4 +69,7 @@ dependencies {
     def version_coroutines = "1.5.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutines"
+
+    // logging
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 }

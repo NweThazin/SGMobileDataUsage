@@ -4,6 +4,7 @@ import android.app.Application
 import com.sg.mytest.sgmobiledatausage.framework.di.AppComponent
 import com.sg.mytest.sgmobiledatausage.framework.di.ApplicationModule
 import com.sg.mytest.sgmobiledatausage.framework.di.DaggerAppComponent
+import timber.log.Timber
 
 class SGMobileApplication : Application() {
 
@@ -17,6 +18,8 @@ class SGMobileApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
 
         // init dagger
         appComponent = DaggerAppComponent.builder()
