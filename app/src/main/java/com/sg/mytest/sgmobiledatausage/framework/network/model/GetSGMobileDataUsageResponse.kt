@@ -6,5 +6,7 @@ data class GetSGMobileDataUsageResponse(
     @SerializedName("help")
     val help: String,
     @SerializedName("success")
-    val success: String
+    val success: String,
+    @SerializedName("result")
+    val result: SGMobileDataResult
 )
