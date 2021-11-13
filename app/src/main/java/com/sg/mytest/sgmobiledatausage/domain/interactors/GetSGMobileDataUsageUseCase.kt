@@ -20,8 +20,6 @@ class GetSGMobileDataUsageUseCase(private val repository: SGMobileRepository) {
                 Timber.e(ex)
                 return@withContext Result.failure(ex)
             }
-
         }
     }
-
 }
