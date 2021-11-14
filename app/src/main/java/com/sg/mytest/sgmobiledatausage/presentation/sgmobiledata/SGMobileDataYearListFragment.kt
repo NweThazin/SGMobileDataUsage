@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sg.mytest.sgmobiledatausage.R
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataYearListBinding
 import javax.inject.Inject
@@ -26,8 +28,17 @@ class SGMobileDataYearListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         SGMobileApplication.getAppComponent().inject(this)
-        binding = FragmentSgMobileDataYearListBinding.inflate(layoutInflater, container, false)
-        viewModel = ViewModelProvider(this, factory).get(SGMobileDataUsageViewModel::class.java)
+
+        binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.fragment_sg_mobile_data_year_list,
+            container,
+            false
+        )
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this, factory)[SGMobileDataUsageViewModel::class.java]
+        binding.viewModel = viewModel
+
         setupAdapter()
         return binding.root
     }
