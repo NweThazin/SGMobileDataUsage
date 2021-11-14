@@ -36,13 +36,16 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
 
     private fun observeLiveData() {
         viewModel.selectedIndex.observe(requireActivity(), { currentPage ->
-            val list = viewModel.mobileDataInfoByYear.value ?: emptyList()
-            val adapter = SGMobileQuarterDataPagerAdapter(
-                requireParentFragment(),
-                list
-            )
-            binding.vpMobileData.adapter = adapter
-            binding.vpMobileData.setCurrentItem(currentPage ?: 0, false)
+            if (isAdded) {
+                val list = viewModel.mobileDataInfoByYear.value ?: emptyList()
+                val adapter = SGMobileQuarterDataPagerAdapter(
+                    requireActivity().supportFragmentManager,
+                    requireActivity().lifecycle,
+                    list
+                )
+                binding.vpMobileData.adapter = adapter
+                binding.vpMobileData.setCurrentItem(currentPage ?: 0, false)
+            }
         })
     }
 
