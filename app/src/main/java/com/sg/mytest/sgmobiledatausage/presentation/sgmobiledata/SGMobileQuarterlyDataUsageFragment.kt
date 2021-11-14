@@ -20,12 +20,16 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
     private lateinit var binding: FragmentSgMobileQuarterlyDataUsageBinding
     private val viewModel by activityViewModels<SGMobileDataUsageViewModel> { factory }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        SGMobileApplication.getAppComponent().inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        SGMobileApplication.getAppComponent().inject(this)
         binding =
             FragmentSgMobileQuarterlyDataUsageBinding.inflate(layoutInflater, container, false)
 

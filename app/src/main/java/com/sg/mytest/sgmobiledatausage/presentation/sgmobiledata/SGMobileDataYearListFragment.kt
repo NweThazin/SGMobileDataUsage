@@ -28,13 +28,16 @@ class SGMobileDataYearListFragment : Fragment() {
     private lateinit var adapter: SGMobileDataYearAdapter
     private val viewModel: SGMobileDataUsageViewModel by activityViewModels { factory }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        SGMobileApplication.getAppComponent().inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        SGMobileApplication.getAppComponent().inject(this)
-
         binding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.fragment_sg_mobile_data_year_list,
