@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mytest.sgmobiledatausage.R
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
@@ -20,7 +22,7 @@ class SGMobileDataYearListFragment : Fragment() {
 
     private lateinit var binding: FragmentSgMobileDataYearListBinding
     private lateinit var adapter: SGMobileDataYearAdapter
-    private lateinit var viewModel: SGMobileDataUsageViewModel
+    private val viewModel: SGMobileDataUsageViewModel by activityViewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +38,22 @@ class SGMobileDataYearListFragment : Fragment() {
             false
         )
         binding.lifecycleOwner = this
-        viewModel = ViewModelProvider(this, factory)[SGMobileDataUsageViewModel::class.java]
         binding.viewModel = viewModel
 
+        fetchData()
         setupAdapter()
+        observeLiveData()
         return binding.root
+    }
+
+    private fun fetchData() {
+        viewModel.fetchSGMobileUsage()
+    }
+
+    private fun observeLiveData() {
+        viewModel.totalVolumeByYear.observe(requireActivity(), { items ->
+            adapter.setItems(items)
+        })
     }
 
     private fun setupAdapter() {
@@ -49,10 +62,12 @@ class SGMobileDataYearListFragment : Fragment() {
         binding.rvYears.adapter = adapter
         binding.rvYears.layoutManager = linearLayoutManager
 
-        // todo: temp to remove and
-        viewModel.fetchSGMobileUsage()
-
-        // todo: to change to actual year data
-        adapter.setItems(listOf("1", "1", "2"))
+        // add divider item decoration to separate item
+        DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL).apply {
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_divider)?.let { drawable ->
+                setDrawable(drawable)
+            }
+            binding.rvYears.addItemDecoration(this)
+        }
     }
 }

@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sg.mytest.sgmobiledatausage.databinding.ListItemMobileDataYearBinding
+import com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear
 
 class SGMobileDataYearAdapter :
     RecyclerView.Adapter<SGMobileDataYearAdapter.SGMobileDataYearItemViewHolder>() {
 
-    // todo - this is temp
-    private var items = listOf<String>()
-    fun setItems(list: List<String>) {
+    private var items = listOf<TotalVolumeByYear>()
+    fun setItems(list: List<TotalVolumeByYear>) {
         items = list
         notifyItemRangeChanged(0, list.size)
     }
@@ -32,9 +32,13 @@ class SGMobileDataYearAdapter :
     class SGMobileDataYearItemViewHolder(private val binding: ListItemMobileDataYearBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        // todo: temp to change data type and add more info to show
-        fun bind(item: String) {
-            binding.tvYear.text = item
+        fun bind(item: TotalVolumeByYear) {
+            binding.tvYear.text = item.year.toString()
+            binding.tvDataVolume.text = item.totalVolume.toString()
+            binding.root.setOnClickListener {
+                // todo : to enable click event
+                println(item)
+            }
         }
 
         companion object {

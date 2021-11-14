@@ -9,4 +9,8 @@ data class Record(
     val quarter: String,
     @SerializedName("_id")
     val id: Int
-)
+) {
+    fun getMobileDataYear(): String {
+        return quarter.substringBefore("-")
+    }
+}
