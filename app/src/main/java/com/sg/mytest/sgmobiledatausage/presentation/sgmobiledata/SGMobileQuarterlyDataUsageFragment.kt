@@ -28,6 +28,7 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
             FragmentSgMobileQuarterlyDataUsageBinding.inflate(layoutInflater, container, false)
 
         setupArguments()
+        setupPagerAdapter()
         return binding.root
     }
 
@@ -37,5 +38,9 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
                 SGMobileQuarterlyDataUsageFragmentArgs.fromBundle(bundle).totalVolumeByYear
             viewModel.setupArgument(volumeByYear)
         }
+    }
+
+    private fun setupPagerAdapter() {
+
     }
 }

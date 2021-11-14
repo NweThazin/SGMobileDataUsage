@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sg.mytest.sgmobiledatausage.databinding.ListItemMobileDataYearBinding
 import com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear
 
-class SGMobileDataYearAdapter(val listener: SGMobileDataYearListener) :
+class SGMobileDataYearAdapter(private val listener: SGMobileDataYearListener) :
     RecyclerView.Adapter<SGMobileDataYearAdapter.SGMobileDataYearItemViewHolder>() {
 
     private var items = listOf<TotalVolumeByYear>()

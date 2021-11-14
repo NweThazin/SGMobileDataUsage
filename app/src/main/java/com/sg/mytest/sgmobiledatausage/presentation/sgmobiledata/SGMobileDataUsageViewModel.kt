@@ -22,7 +22,7 @@ class SGMobileDataUsageViewModel(
     val apiStatus: LiveData<ApiStatus> = _apiStatus
 
     private val _groupOfDataByYear = MutableLiveData<Map<String, List<Record>>>()
-    val groupOfDataByYear: LiveData<Map<String, List<Record>>> = _groupOfDataByYear
+    private val groupOfDataByYear: LiveData<Map<String, List<Record>>> = _groupOfDataByYear
 
     private val _totalVolumeByYear = MutableLiveData<List<TotalVolumeByYear>>()
     val totalVolumeByYear: LiveData<List<TotalVolumeByYear>> = _totalVolumeByYear
@@ -51,7 +51,7 @@ class SGMobileDataUsageViewModel(
         val totalVolumeList = arrayListOf<TotalVolumeByYear>()
         for (year in 2010..currentYear) {
             val totalVolumeByYear = groupOfDataByYear[year.toString()]?.let { records ->
-                var dataVolume: Double = 0.0
+                var dataVolume = 0.0
                 records.map { record ->
                     val quarterVolume = record.volumeOfMobileData.toDoubleOrNull() ?: 0.0
                     dataVolume += quarterVolume

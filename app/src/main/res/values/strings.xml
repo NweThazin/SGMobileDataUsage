@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SG Mobile Usage</string>
-    <string name="label_year">Year :</string>
-    <string name="label_volume_of_data">Volume of Data:</string>
+  <string name="app_name">SG Mobile Usage</string>
+  <string name="label_year">Year :</string>
+  <string name="label_volume_of_data">Volume of Data:</string>
 </resources>
