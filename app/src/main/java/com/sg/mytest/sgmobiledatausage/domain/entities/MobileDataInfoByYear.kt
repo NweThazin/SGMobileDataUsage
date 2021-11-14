@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class TotalVolumeByYear(
+data class MobileDataInfoByYear(
     val year: Int,
-    val totalVolume: Double
+    val totalVolume: Double,
+    val quarterlyRecord: List<Record>
 ) : Parcelable

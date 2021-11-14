@@ -15,9 +15,9 @@
     <fragment
         android:id="@+id/SGMobileQuarterlyDataUsageFragment"
         android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileQuarterlyDataUsageFragment"
-        android:label="SGMobileQuarterlyDataUsageFragment" >
+        android:label="SGMobileQuarterlyDataUsageFragment">
         <argument
-            android:name="totalVolumeByYear"
-            app:argType="com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear" />
+            android:name="year"
+            app:argType="integer" />
     </fragment>
 </navigation>

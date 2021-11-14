@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mytest.sgmobiledatausage.R
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataYearListBinding
-import com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear
+import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearAdapter
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearListener
 import javax.inject.Inject
@@ -55,7 +55,7 @@ class SGMobileDataYearListFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        viewModel.totalVolumeByYear.observe(requireActivity(), { items ->
+        viewModel.mobileDataInfoByYear.observe(requireActivity(), { items ->
             adapter.setItems(items)
         })
     }
@@ -63,8 +63,8 @@ class SGMobileDataYearListFragment : Fragment() {
     private fun setupAdapter() {
         val linearLayoutManager = LinearLayoutManager(requireContext())
         adapter = SGMobileDataYearAdapter(object : SGMobileDataYearListener {
-            override fun onClickItem(totalVolumeByYear: TotalVolumeByYear) {
-                showQuartersByYear(totalVolumeByYear)
+            override fun onClickItem(mobileDataInfoByYear: MobileDataInfoByYear) {
+                showQuartersByYear(mobileDataInfoByYear)
             }
         })
         binding.rvYears.adapter = adapter
@@ -79,11 +79,11 @@ class SGMobileDataYearListFragment : Fragment() {
         }
     }
 
-    private fun showQuartersByYear(totalVolumeByYear: TotalVolumeByYear) {
+    private fun showQuartersByYear(mobileDataInfoByYear: MobileDataInfoByYear) {
         val action =
             SGMobileDataYearListFragmentDirections
                 .actionSGMobileDataYearListFragmentToSGMobileQuarterlyDataUsageFragment(
-                    totalVolumeByYear
+                    mobileDataInfoByYear.year
                 )
         findNavController().navigate(action)
     }

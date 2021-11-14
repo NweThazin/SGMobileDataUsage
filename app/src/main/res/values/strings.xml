@@ -1,5 +1,10 @@
 <resources>
-  <string name="app_name">SG Mobile Usage</string>
-  <string name="label_year">Year :</string>
-  <string name="label_volume_of_data">Volume of Data:</string>
+    <string name="app_name">SG Mobile Usage</string>
+    <string name="label_year">Year :</string>
+    <string name="label_volume_of_data">Volume of Data:</string>
+    <string name="label_year_with_args">Year : %d</string>
+
+    <string name="label_quarter_with_args">Quarter : %s</string>
+    <string name="label_quarter_volume_od_data_with_args">Volume of Data : %s</string>
+    <string name="error_no_quarter_data_available">No quarter data is available!</string>
 </resources>

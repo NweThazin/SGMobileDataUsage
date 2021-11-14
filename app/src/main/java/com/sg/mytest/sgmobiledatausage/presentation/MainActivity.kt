@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.ActivityMainBinding
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.sg.mytest.sgmobiledatausage.R
 
 class MainActivity : AppCompatActivity() {
 

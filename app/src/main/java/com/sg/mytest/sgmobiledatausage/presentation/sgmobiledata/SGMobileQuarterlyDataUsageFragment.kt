@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileQuarterlyDataUsageBinding
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileQuarterDataPagerAdapter
@@ -29,23 +30,26 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
             FragmentSgMobileQuarterlyDataUsageBinding.inflate(layoutInflater, container, false)
 
         setupArguments()
-        setupPagerAdapter()
+        observeLiveData()
         return binding.root
+    }
+
+    private fun observeLiveData() {
+        viewModel.selectedIndex.observe(requireActivity(), { currentPage ->
+            val list = viewModel.mobileDataInfoByYear.value ?: emptyList()
+            val adapter = SGMobileQuarterDataPagerAdapter(
+                requireParentFragment(),
+                list
+            )
+            binding.vpMobileData.adapter = adapter
+            binding.vpMobileData.setCurrentItem(currentPage ?: 0, false)
+        })
     }
 
     private fun setupArguments() {
         arguments?.let { bundle ->
-            val volumeByYear =
-                SGMobileQuarterlyDataUsageFragmentArgs.fromBundle(bundle).totalVolumeByYear
-            viewModel.setupArgument(volumeByYear)
+            val year = SGMobileQuarterlyDataUsageFragmentArgs.fromBundle(bundle).year
+            viewModel.setupArgument(year)
         }
-    }
-
-    private fun setupPagerAdapter() {
-        val adapter = SGMobileQuarterDataPagerAdapter(
-            requireParentFragment(),
-            listOf("adfasdf0", "asdfasdf", "asdfasdf")
-        )
-        binding.vpMobileData.adapter = adapter
     }
 }
