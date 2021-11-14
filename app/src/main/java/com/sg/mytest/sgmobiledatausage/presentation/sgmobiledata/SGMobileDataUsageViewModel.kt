@@ -21,6 +21,9 @@ class SGMobileDataUsageViewModel(
     private val _apiStatus = MutableLiveData<ApiStatus>()
     val apiStatus: LiveData<ApiStatus> = _apiStatus
 
+    private val _groupOfDataByYear = MutableLiveData<Map<String, List<Record>>>()
+    val groupOfDataByYear: LiveData<Map<String, List<Record>>> = _groupOfDataByYear
+
     private val _totalVolumeByYear = MutableLiveData<List<TotalVolumeByYear>>()
     val totalVolumeByYear: LiveData<List<TotalVolumeByYear>> = _totalVolumeByYear
 
@@ -31,6 +34,7 @@ class SGMobileDataUsageViewModel(
             result.onSuccess { response ->
                 val groupOfDataByYear = response.result.records.groupBy { it.getMobileDataYear() }
                 val totalVolumeByYear = generateYearsFrom2010(groupOfDataByYear)
+                _groupOfDataByYear.postValue(groupOfDataByYear)
                 _totalVolumeByYear.postValue(totalVolumeByYear)
                 _apiStatus.postValue(ApiStatus.SUCCESS)
             }.onFailure {
@@ -57,6 +61,16 @@ class SGMobileDataUsageViewModel(
             totalVolumeList.add(totalVolumeByYear)
         }
         return totalVolumeList
+    }
+
+    // used this function from SGMobileQuarterlyDataUsageFragment
+    fun setupArgument(volumeByYear: TotalVolumeByYear) {
+        groupOfDataByYear.value?.get(volumeByYear.year.toString())?.let { listOfRecords ->
+            // todo: to fix it
+            println(volumeByYear)
+            println(listOfRecords)
+            println("do nothing and will start working on it")
+        }
     }
 
 }
