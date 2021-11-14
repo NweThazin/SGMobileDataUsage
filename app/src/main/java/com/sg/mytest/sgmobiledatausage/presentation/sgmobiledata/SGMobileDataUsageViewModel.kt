@@ -8,14 +8,17 @@ import androidx.lifecycle.viewModelScope
 import com.sg.mytest.sgmobiledatausage.domain.entities.Record
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 import com.sg.mytest.sgmobiledatausage.domain.interactors.GetSGMobileDataUsageUseCase
+import com.sg.mytest.sgmobiledatausage.domain.interactors.RetrieveCachedSGMobileDataUsageUseCase
 import com.sg.mytest.sgmobiledatausage.framework.network.model.ApiStatus
 import com.sg.mytest.sgmobiledatausage.util.DateTimeUtil
+import com.sg.mytest.sgmobiledatausage.util.isNetworkAvailable
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class SGMobileDataUsageViewModel(
     val application: Application,
-    private val useCase: GetSGMobileDataUsageUseCase
+    private val useCase: GetSGMobileDataUsageUseCase,
+    private val localUseCase: RetrieveCachedSGMobileDataUsageUseCase
 ) : ViewModel() {
 
     private val _apiStatus = MutableLiveData<ApiStatus>()
@@ -27,13 +30,23 @@ class SGMobileDataUsageViewModel(
     private val _selectedIndex = MutableLiveData<Int>()
     val selectedIndex: LiveData<Int> = _selectedIndex
 
-    fun fetchSGMobileUsage() {
+    fun loadSGMobileDataUsage() {
+        // if network available, fetch data from network & cache in local storage
+        val isNetworkAvailable = application.applicationContext.isNetworkAvailable()
+        if (isNetworkAvailable) {
+            fetchDataFromNetwork()
+        } else {
+            // if network is not available, get data from local and show
+            fetchDataFromLocal()
+        }
+    }
+
+    private fun fetchDataFromNetwork() {
         _apiStatus.postValue(ApiStatus.LOADING)
         viewModelScope.launch {
             val result = useCase.invoke()
             result.onSuccess { response ->
-                val groupOfDataByYear = response.result.records.groupBy { it.getMobileDataYear() }
-                val totalVolumeByYear = generateYearsFrom2010(groupOfDataByYear)
+                val totalVolumeByYear = generateYearsFrom2010(response.result.records)
                 _mobileDataInfoByYear.postValue(totalVolumeByYear)
                 _apiStatus.postValue(ApiStatus.SUCCESS)
             }.onFailure {
@@ -44,7 +57,16 @@ class SGMobileDataUsageViewModel(
         }
     }
 
-    private fun generateYearsFrom2010(groupOfDataByYear: Map<String, List<Record>>): List<MobileDataInfoByYear> {
+    private fun fetchDataFromLocal() {
+        viewModelScope.launch {
+            val records = localUseCase.invoke()
+            _mobileDataInfoByYear.postValue(generateYearsFrom2010(records))
+            _apiStatus.postValue(ApiStatus.SUCCESS)
+        }
+    }
+
+    private fun generateYearsFrom2010(recordList: List<Record>): List<MobileDataInfoByYear> {
+        val groupOfDataByYear = recordList.groupBy { it.getMobileDataYear() }
         val currentYear = DateTimeUtil.getCurrentYear()
         val totalVolumeList = arrayListOf<MobileDataInfoByYear>()
         for (year in 2010..currentYear) {

@@ -2,6 +2,7 @@ package com.sg.mytest.sgmobiledatausage.domain.interactors
 
 import kotlinx.coroutines.withContext
 import com.sg.mytest.sgmobiledatausage.data.repository.SGMobileRepository
+import com.sg.mytest.sgmobiledatausage.framework.database.entities.asDatabaseModel
 import com.sg.mytest.sgmobiledatausage.framework.network.model.GetSGMobileDataUsageResponse
 import kotlinx.coroutines.Dispatchers
 import retrofit2.await
@@ -15,6 +16,9 @@ class GetSGMobileDataUsageUseCase(private val repository: SGMobileRepository) {
                 val resourceId = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
                 val result = repository.getSGMobileDataUsage(resourceId).await()
                 Timber.d(result.toString())
+                // caching records in local db
+                val recordEntities = result.result.records.asDatabaseModel()
+                repository.insertAllRecords(recordEntities)
                 return@withContext Result.success(result)
             } catch (ex: Exception) {
                 Timber.e(ex)

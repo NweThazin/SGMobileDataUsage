@@ -16,7 +16,7 @@ data class RecordEntity(
     @ColumnInfo(name = "_id")
     val recordId: Int,
     @ColumnInfo(name = "year")
-    val year: Int
+    val year: String
 )
 
 fun String.getMobileDataYear(): String {
@@ -29,6 +29,18 @@ fun List<RecordEntity>.asDomainModel(): List<Record> {
             volumeOfMobileData = it.volumeOfMobileData,
             quarter = it.quarter,
             id = it.recordId
+        )
+    }
+}
+
+fun List<Record>.asDatabaseModel(): List<RecordEntity> {
+    return map {
+        RecordEntity(
+            id = it.id.toLong(),
+            volumeOfMobileData = it.volumeOfMobileData,
+            quarter = it.quarter,
+            recordId = it.id,
+            year = it.getMobileDataYear()
         )
     }
 }

@@ -17,6 +17,7 @@ import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataYearListB
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearAdapter
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearListener
+import com.sg.mytest.sgmobiledatausage.util.isNetworkAvailable
 import javax.inject.Inject
 
 class SGMobileDataYearListFragment : Fragment() {
@@ -54,7 +55,7 @@ class SGMobileDataYearListFragment : Fragment() {
     }
 
     private fun fetchData() {
-        viewModel.fetchSGMobileUsage()
+        viewModel.loadSGMobileDataUsage()
     }
 
     private fun observeLiveData() {
