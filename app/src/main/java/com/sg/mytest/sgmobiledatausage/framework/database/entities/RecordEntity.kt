@@ -13,14 +13,8 @@ data class RecordEntity(
     val quarter: String,
     @PrimaryKey
     @ColumnInfo(name = "_id")
-    val recordId: Int,
-    @ColumnInfo(name = "year")
-    val year: String
+    val recordId: Int
 )
-
-fun String.getMobileDataYear(): String {
-    return substringBefore("-")
-}
 
 fun List<RecordEntity>.asDomainModel(): List<Record> {
     return map {
@@ -37,8 +31,7 @@ fun List<Record>.asDatabaseModel(): List<RecordEntity> {
         RecordEntity(
             volumeOfMobileData = it.volumeOfMobileData,
             quarter = it.quarter,
-            recordId = it.id,
-            year = it.getMobileDataYear()
+            recordId = it.id
         )
     }
 }
