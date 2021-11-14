@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/SGMobileDataYearListFragment"
         android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataYearListFragment"
-        android:label="SGMobileDataYearListFragment" />
+        android:label="SGMobileDataYearListFragment">
+        <action
+            android:id="@+id/action_SGMobileDataYearListFragment_to_SGMobileQuarterlyDataUsageFragment"
+            app:destination="@id/SGMobileQuarterlyDataUsageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SGMobileQuarterlyDataUsageFragment"
+        android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileQuarterlyDataUsageFragment"
+        android:label="SGMobileQuarterlyDataUsageFragment" >
+        <argument
+            android:name="totalVolumeByYear"
+            app:argType="com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear" />
+    </fragment>
 </navigation>

@@ -8,11 +8,15 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mytest.sgmobiledatausage.R
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataYearListBinding
+import com.sg.mytest.sgmobiledatausage.domain.entities.TotalVolumeByYear
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearAdapter
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearListener
 import javax.inject.Inject
 
 class SGMobileDataYearListFragment : Fragment() {
@@ -58,7 +62,11 @@ class SGMobileDataYearListFragment : Fragment() {
 
     private fun setupAdapter() {
         val linearLayoutManager = LinearLayoutManager(requireContext())
-        adapter = SGMobileDataYearAdapter()
+        adapter = SGMobileDataYearAdapter(object : SGMobileDataYearListener {
+            override fun onClickItem(totalVolumeByYear: TotalVolumeByYear) {
+                showQuartersByYear(totalVolumeByYear)
+            }
+        })
         binding.rvYears.adapter = adapter
         binding.rvYears.layoutManager = linearLayoutManager
 
@@ -69,5 +77,14 @@ class SGMobileDataYearListFragment : Fragment() {
             }
             binding.rvYears.addItemDecoration(this)
         }
+    }
+
+    private fun showQuartersByYear(totalVolumeByYear: TotalVolumeByYear) {
+        val action =
+            SGMobileDataYearListFragmentDirections
+                .actionSGMobileDataYearListFragmentToSGMobileQuarterlyDataUsageFragment(
+                    totalVolumeByYear
+                )
+        findNavController().navigate(action)
     }
 }
