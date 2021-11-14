@@ -82,6 +82,12 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // lifecycle
-    def lifecycle_version = "2.4.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    def version_lifecycle = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+
+    // room db
+    def version_room = "2.3.0"
+    implementation "androidx.room:room-runtime:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
 }

@@ -1,6 +1,7 @@
 package com.sg.mytest.sgmobiledatausage.framework.di
 
 import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,5 +13,11 @@ class ApplicationModule(private val application: Application) {
     @Provides
     fun provideApplication(): Application {
         return application
+    }
+
+    @Singleton
+    @Provides
+    fun provideContext(): Context {
+        return application.applicationContext
     }
 }
