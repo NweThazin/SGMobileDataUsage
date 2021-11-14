@@ -7,7 +7,6 @@ import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileEachQua
 class SGMobileQuarterDataPagerAdapter(
     fragment: Fragment,
     private val data: List<String>
-
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return data.size

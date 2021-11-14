@@ -39,6 +39,10 @@ class SGMobileEachQuarterDataUsageFragment : Fragment() {
         val position = requireArguments().getInt(ARGUMENT_POSITION)
         val data = requireArguments().getString(ARGUMENT_QUARTERLY_DATA)
 
+
+
         println(position)
+
+
     }
 }

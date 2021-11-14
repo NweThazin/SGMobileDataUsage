@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileQuarterlyDataUsageBinding
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileQuarterDataPagerAdapter
 import javax.inject.Inject
 
 class SGMobileQuarterlyDataUsageFragment : Fragment() {
@@ -41,6 +42,10 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
     }
 
     private fun setupPagerAdapter() {
-
+        val adapter = SGMobileQuarterDataPagerAdapter(
+            requireParentFragment(),
+            listOf("adfasdf0", "asdfasdf", "asdfasdf")
+        )
+        binding.vpMobileData.adapter = adapter
     }
 }
