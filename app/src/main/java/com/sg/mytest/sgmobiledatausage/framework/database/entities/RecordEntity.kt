@@ -7,12 +7,11 @@ import com.sg.mytest.sgmobiledatausage.domain.entities.Record
 
 @Entity(tableName = "record_entity")
 data class RecordEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long,
     @ColumnInfo(name = "volume_of_mobile_data")
     val volumeOfMobileData: String,
     @ColumnInfo(name = "quarter")
     val quarter: String,
+    @PrimaryKey
     @ColumnInfo(name = "_id")
     val recordId: Int,
     @ColumnInfo(name = "year")
@@ -36,7 +35,6 @@ fun List<RecordEntity>.asDomainModel(): List<Record> {
 fun List<Record>.asDatabaseModel(): List<RecordEntity> {
     return map {
         RecordEntity(
-            id = it.id.toLong(),
             volumeOfMobileData = it.volumeOfMobileData,
             quarter = it.quarter,
             recordId = it.id,
