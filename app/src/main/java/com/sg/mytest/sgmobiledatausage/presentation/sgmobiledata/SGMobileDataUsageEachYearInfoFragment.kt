@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sg.mytest.sgmobiledatausage.R
-import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileEachQuarterDataUsageBinding
+import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataUsageEachYearInfoBinding
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 
-class SGMobileEachQuarterDataUsageFragment : Fragment() {
+class SGMobileDataUsageEachYearInfoFragment : Fragment() {
 
-    private lateinit var binding: FragmentSgMobileEachQuarterDataUsageBinding
+    private lateinit var binding: FragmentSgMobileDataUsageEachYearInfoBinding
 
     companion object {
         private const val ARGUMENT_QUARTERLY_DATA = "ARGUMENT_QUARTERLY_DATA"
 
         fun getInstance(quarterlyData: MobileDataInfoByYear): Fragment {
-            val fragment = SGMobileEachQuarterDataUsageFragment()
+            val fragment = SGMobileDataUsageEachYearInfoFragment()
             val bundle = Bundle()
             bundle.putParcelable(ARGUMENT_QUARTERLY_DATA, quarterlyData)
             fragment.arguments = bundle
@@ -32,7 +32,7 @@ class SGMobileEachQuarterDataUsageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding =
-            FragmentSgMobileEachQuarterDataUsageBinding.inflate(layoutInflater, container, false)
+            FragmentSgMobileDataUsageEachYearInfoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

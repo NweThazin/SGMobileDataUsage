@@ -6,19 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import androidx.viewpager2.widget.ViewPager2
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
-import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileQuarterlyDataUsageBinding
+import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataUsageDetailBinding
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileQuarterDataPagerAdapter
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.tracking.SGMobileTracker
 import javax.inject.Inject
 
-class SGMobileQuarterlyDataUsageFragment : Fragment() {
+class SGMobileDataUsageDetailFragment : Fragment() {
 
     @Inject
     lateinit var factory: SGMobileDataUsageViewModelFactory
 
-    private lateinit var binding: FragmentSgMobileQuarterlyDataUsageBinding
+    private lateinit var binding: FragmentSgMobileDataUsageDetailBinding
     private val viewModel by activityViewModels<SGMobileDataUsageViewModel> { factory }
+
+    private val tracker = SGMobileTracker()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +33,7 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
-            FragmentSgMobileQuarterlyDataUsageBinding.inflate(layoutInflater, container, false)
-
+        binding = FragmentSgMobileDataUsageDetailBinding.inflate(layoutInflater, container, false)
         setupArguments()
         observeLiveData()
         return binding.root
@@ -51,11 +52,21 @@ class SGMobileQuarterlyDataUsageFragment : Fragment() {
                 binding.vpMobileData.setCurrentItem(currentPage ?: 0, false)
             }
         })
+
+        binding.vpMobileData.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val list = viewModel.mobileDataInfoByYear.value ?: return
+                val item = list[position]
+                tracker.trackCurrentlyViewingYear(item.year.toString())
+            }
+        })
     }
 
     private fun setupArguments() {
         arguments?.let { bundle ->
-            val year = SGMobileQuarterlyDataUsageFragmentArgs.fromBundle(bundle).year
+            val year = SGMobileDataUsageDetailFragmentArgs.fromBundle(bundle).year
             viewModel.setupArgument(year)
         }
     }

@@ -13,19 +13,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mytest.sgmobiledatausage.R
 import com.sg.mytest.sgmobiledatausage.SGMobileApplication
-import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataYearListBinding
+import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataUsageYearListBinding
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearAdapter
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearListener
-import com.sg.mytest.sgmobiledatausage.util.isNetworkAvailable
 import javax.inject.Inject
 
-class SGMobileDataYearListFragment : Fragment() {
+class SGMobileDataUsageYearListFragment : Fragment() {
 
     @Inject
     lateinit var factory: SGMobileDataUsageViewModelFactory
 
-    private lateinit var binding: FragmentSgMobileDataYearListBinding
+    private lateinit var binding: FragmentSgMobileDataUsageYearListBinding
     private lateinit var adapter: SGMobileDataYearAdapter
     private val viewModel: SGMobileDataUsageViewModel by activityViewModels { factory }
 
@@ -42,7 +41,7 @@ class SGMobileDataYearListFragment : Fragment() {
         if (!this::binding.isInitialized) {
             binding = DataBindingUtil.inflate(
                 layoutInflater,
-                R.layout.fragment_sg_mobile_data_year_list,
+                R.layout.fragment_sg_mobile_data_usage_year_list,
                 container,
                 false
             )
@@ -87,7 +86,7 @@ class SGMobileDataYearListFragment : Fragment() {
 
     private fun showQuartersByYear(mobileDataInfoByYear: MobileDataInfoByYear) {
         val action =
-            SGMobileDataYearListFragmentDirections
+            SGMobileDataUsageYearListFragmentDirections
                 .actionSGMobileDataYearListFragmentToSGMobileQuarterlyDataUsageFragment(
                     mobileDataInfoByYear.year
                 )

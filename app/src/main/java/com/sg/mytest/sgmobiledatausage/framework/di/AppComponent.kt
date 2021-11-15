@@ -1,8 +1,8 @@
 package com.sg.mytest.sgmobiledatausage.framework.di
 
 import com.sg.mytest.sgmobiledatausage.presentation.MainActivity
-import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataYearListFragment
-import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileQuarterlyDataUsageFragment
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageYearListFragment
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageDetailFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,6 +19,6 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(activity: MainActivity)
-    fun inject(fragment: SGMobileDataYearListFragment)
-    fun inject(fragment: SGMobileQuarterlyDataUsageFragment)
+    fun inject(fragmentUsage: SGMobileDataUsageYearListFragment)
+    fun inject(detailFragment: SGMobileDataUsageDetailFragment)
 }

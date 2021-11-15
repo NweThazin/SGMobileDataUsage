@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
-import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileEachQuarterDataUsageFragment
+import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageEachYearInfoFragment
 
 class SGMobileQuarterDataPagerAdapter(
     fragmentManager: FragmentManager,
@@ -18,6 +18,6 @@ class SGMobileQuarterDataPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         val item = mobileData[position]
-        return SGMobileEachQuarterDataUsageFragment.getInstance(item)
+        return SGMobileDataUsageEachYearInfoFragment.getInstance(item)
     }
 }
