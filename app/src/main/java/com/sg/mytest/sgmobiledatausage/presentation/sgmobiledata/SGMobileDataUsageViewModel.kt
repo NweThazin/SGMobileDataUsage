@@ -41,7 +41,7 @@ class SGMobileDataUsageViewModel(
         }
     }
 
-    private fun fetchDataFromNetwork() {
+    fun fetchDataFromNetwork() {
         _apiStatus.postValue(ApiStatus.LOADING)
         viewModelScope.launch {
             val result = useCase.invoke()
