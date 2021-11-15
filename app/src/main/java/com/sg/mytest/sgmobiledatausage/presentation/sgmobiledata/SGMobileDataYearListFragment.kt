@@ -39,18 +39,20 @@ class SGMobileDataYearListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
-            layoutInflater,
-            R.layout.fragment_sg_mobile_data_year_list,
-            container,
-            false
-        )
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        if (!this::binding.isInitialized) {
+            binding = DataBindingUtil.inflate(
+                layoutInflater,
+                R.layout.fragment_sg_mobile_data_year_list,
+                container,
+                false
+            )
+            binding.lifecycleOwner = this
+            binding.viewModel = viewModel
 
-        fetchData()
-        setupAdapter()
-        observeLiveData()
+            fetchData()
+            setupAdapter()
+            observeLiveData()
+        }
         return binding.root
     }
 

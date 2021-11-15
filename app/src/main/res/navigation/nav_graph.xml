@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/SGMobileDataYearListFragment"
         android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataYearListFragment"
-        android:label="SGMobileDataYearListFragment">
+        android:label="@string/label_sg_mobile_data_usage">
         <action
             android:id="@+id/action_SGMobileDataYearListFragment_to_SGMobileQuarterlyDataUsageFragment"
             app:destination="@id/SGMobileQuarterlyDataUsageFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/SGMobileQuarterlyDataUsageFragment"
         android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileQuarterlyDataUsageFragment"
-        android:label="SGMobileQuarterlyDataUsageFragment">
+        android:label="@string/label_sg_mobile_quarterly_data_usage">
         <argument
             android:name="year"
             app:argType="integer" />

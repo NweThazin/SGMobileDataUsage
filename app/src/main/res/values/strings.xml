@@ -7,4 +7,6 @@
     <string name="label_quarter_with_args">Quarter : %s</string>
     <string name="label_quarter_volume_od_data_with_args">Volume of Data : %s</string>
     <string name="error_no_quarter_data_available">No quarter data is available!</string>
+    <string name="label_sg_mobile_data_usage">SG Mobile Data Usage</string>
+    <string name="label_sg_mobile_quarterly_data_usage">SG Mobile Quarterly Data Usage</string>
 </resources>
