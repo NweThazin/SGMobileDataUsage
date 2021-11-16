@@ -7,8 +7,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class RetrieveCachedSGMobileDataUsageUseCase(private val repository: SGMobileRepository) {
-    suspend operator fun invoke(): List<Record> {
+interface RetrieveCachedSGMobileDataUsageUseCase {
+    suspend operator fun invoke(): List<Record>
+}
+
+class RetrieveCachedSGMobileDataUsageUseCaseImpl(private val repository: SGMobileRepository) :
+    RetrieveCachedSGMobileDataUsageUseCase {
+    override suspend operator fun invoke(): List<Record> {
         return withContext(Dispatchers.IO) {
             try {
                 val entities = repository.getAllRecords()

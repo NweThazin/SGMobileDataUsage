@@ -9,8 +9,13 @@ import retrofit2.await
 import timber.log.Timber
 import java.lang.Exception
 
-class GetSGMobileDataUsageUseCase(private val repository: SGMobileRepository) {
-    suspend operator fun invoke(): Result<GetSGMobileDataUsageResponse> {
+interface GetSGMobileDataUsageUseCase {
+    suspend operator fun invoke(): Result<GetSGMobileDataUsageResponse>
+}
+
+class GetSGMobileDataUsageUseCaseImpl(private val repository: SGMobileRepository) :
+    GetSGMobileDataUsageUseCase {
+    override suspend operator fun invoke(): Result<GetSGMobileDataUsageResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 val resourceId = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"

@@ -57,7 +57,7 @@ class SGMobileDataUsageViewModel(
         }
     }
 
-    private fun fetchDataFromLocal() {
+    fun fetchDataFromLocal() {
         viewModelScope.launch {
             val records = localUseCase.invoke()
             _mobileDataInfoByYear.postValue(generateYearsFrom2010(records))
