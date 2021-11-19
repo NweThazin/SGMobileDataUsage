@@ -17,6 +17,6 @@ Third parties libraries can be found in app/build.gradle file. Some libraries an
 - [Dagger](https://github.com/google/dagger) for dependency injection
 - [Timber](https://github.com/JakeWharton/timber) for logging
 - [Room](https://developer.android.com/topic/libraries/architecture/room) is used as the database.
-  Please see NNRoomDatabase class for details.
+  Please see SGMobileUsageDatabase class for details.
 - [Gson](https://github.com/google/gson) or parsing JSON to Java Object
 - Other more dependencies can be found at dependencies block of app/build.gradle.
