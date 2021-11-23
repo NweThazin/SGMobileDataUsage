@@ -60,7 +60,7 @@ class SGMobileDataUsageYearListFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        viewModel.mobileDataInfoByYear.observe(requireActivity(), { items ->
+        viewModel.mobileDataInfoByYear.observe(viewLifecycleOwner, { items ->
             adapter.setItems(items)
         })
     }
