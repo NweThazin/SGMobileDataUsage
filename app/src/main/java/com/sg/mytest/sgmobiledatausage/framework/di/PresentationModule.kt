@@ -4,14 +4,10 @@ import android.app.Application
 import com.sg.mytest.sgmobiledatausage.domain.interactors.GetSGMobileDataUsageUseCase
 import com.sg.mytest.sgmobiledatausage.domain.interactors.RetrieveCachedSGMobileDataUsageUseCase
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageViewModelFactory
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 
-@Module
-class PresentationModule {
+val presentationModule = module {
 
-    //region Factory
-    @Provides
     fun provideSGMobileDataUsageViewModelFactory(
         application: Application,
         useCase: GetSGMobileDataUsageUseCase,
@@ -20,5 +16,5 @@ class PresentationModule {
         return SGMobileDataUsageViewModelFactory(application, useCase, localUseCase)
     }
 
-    //endregion
+    factory { provideSGMobileDataUsageViewModelFactory(get(), get(), get()) }
 }

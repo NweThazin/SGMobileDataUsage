@@ -12,17 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sg.mytest.sgmobiledatausage.R
-import com.sg.mytest.sgmobiledatausage.SGMobileApplication
 import com.sg.mytest.sgmobiledatausage.databinding.FragmentSgMobileDataUsageYearListBinding
 import com.sg.mytest.sgmobiledatausage.domain.entities.MobileDataInfoByYear
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearAdapter
 import com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.adapter.SGMobileDataYearListener
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 class SGMobileDataUsageYearListFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: SGMobileDataUsageViewModelFactory
+    private val factory: SGMobileDataUsageViewModelFactory by inject()
 
     private lateinit var binding: FragmentSgMobileDataUsageYearListBinding
     private lateinit var adapter: SGMobileDataYearAdapter
@@ -30,7 +28,6 @@ class SGMobileDataUsageYearListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SGMobileApplication.getAppComponent().inject(this)
     }
 
     override fun onCreateView(

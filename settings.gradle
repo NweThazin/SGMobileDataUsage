@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SGMobileDataUsage"
 include ':app'
+
+startParameter.offline=false

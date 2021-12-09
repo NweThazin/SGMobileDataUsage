@@ -4,17 +4,15 @@ import com.sg.mytest.sgmobiledatausage.data.datasource.SGMobileDataSource
 import com.sg.mytest.sgmobiledatausage.data.repository.SGMobileRepository
 import com.sg.mytest.sgmobiledatausage.data.repository.SGMobileRepositoryImpl
 import com.sg.mytest.sgmobiledatausage.framework.database.SGMobileDatabaseDao
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 
-@Module
-class DataModule {
-
-    @Provides
+val dataModule = module {
     fun provideSGMobileRepository(
         dataSource: SGMobileDataSource,
         dao: SGMobileDatabaseDao
     ): SGMobileRepository {
         return SGMobileRepositoryImpl(dataSource, dao)
     }
+
+    single { provideSGMobileRepository(get(), get()) }
 }

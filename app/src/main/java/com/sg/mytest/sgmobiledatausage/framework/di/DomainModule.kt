@@ -5,21 +5,22 @@ import com.sg.mytest.sgmobiledatausage.domain.interactors.GetSGMobileDataUsageUs
 import com.sg.mytest.sgmobiledatausage.domain.interactors.GetSGMobileDataUsageUseCaseImpl
 import com.sg.mytest.sgmobiledatausage.domain.interactors.RetrieveCachedSGMobileDataUsageUseCase
 import com.sg.mytest.sgmobiledatausage.domain.interactors.RetrieveCachedSGMobileDataUsageUseCaseImpl
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 
-@Module
-class DomainModule {
+val domainModule = module {
 
-    @Provides
-    fun provideGetSGMobileDataUsageUseCase(repository: SGMobileRepository): GetSGMobileDataUsageUseCase {
+    fun provideGetSGMobileDataUsageUseCase(
+        repository: SGMobileRepository
+    ): GetSGMobileDataUsageUseCase {
         return GetSGMobileDataUsageUseCaseImpl(repository)
     }
 
-    @Provides
     fun provideRetrieveCachedSGMobileDataUsageUseCase(
         repository: SGMobileRepository
     ): RetrieveCachedSGMobileDataUsageUseCase {
         return RetrieveCachedSGMobileDataUsageUseCaseImpl(repository)
     }
+
+    single { provideGetSGMobileDataUsageUseCase(get()) }
+    single { provideRetrieveCachedSGMobileDataUsageUseCase(get()) }
 }

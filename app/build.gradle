@@ -81,13 +81,6 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$version_mockito"
     androidTestImplementation "org.mockito:mockito-android:$version_mockito"
 
-    // dagger 2
-    def version_dagger = "2.40.1"
-    implementation "com.google.dagger:dagger:$version_dagger"
-    kapt "com.google.dagger:dagger-compiler:$version_dagger"
-    kapt 'com.google.dagger:dagger-android-processor:2.29.1'
-    annotationProcessor "com.google.dagger:dagger-compiler:$version_dagger"
-
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit-converters:2.6.3'
@@ -121,6 +114,5 @@ dependencies {
 
     // koin dependency
     def version_koin = "3.1.4"
-    implementation "org.koin:koin-android-viewmodel:$version_koin"
-    implementation "org.koin:koin-android:$version_koin"
+    implementation "io.insert-koin:koin-android:$version_koin"
 }
