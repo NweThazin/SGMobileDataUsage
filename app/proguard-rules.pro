@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# keep fragment
+-keep class * extends androidx.fragment.app.Fragment{}
+
+# data classes
+-keep class com.sg.mytest.sgmobiledatausage.framework.network.model.** { *; }
+-keep class com.sg.mytest.sgmobiledatausage.domain.entities.**{ *; }
+-keep class com.sg.mytest.sgmobiledatausage.framework.database.entities.** { *; }
