@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/SGMobileDataYearListFragment">
+
+    <fragment
+        android:id="@+id/SGMobileDataYearListFragment"
+        android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageYearListFragment"
+        android:label="@string/label_sg_mobile_data_usage">
+        <action
+            android:id="@+id/action_SGMobileDataYearListFragment_to_SGMobileQuarterlyDataUsageFragment"
+            app:destination="@id/SGMobileQuarterlyDataUsageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SGMobileQuarterlyDataUsageFragment"
+        android:name="com.sg.mytest.sgmobiledatausage.presentation.sgmobiledata.SGMobileDataUsageDetailFragment"
+        android:label="@string/label_sg_mobile_quarterly_data_usage">
+        <argument
+            android:name="year"
+            app:argType="integer" />
+    </fragment>
+</navigation>
